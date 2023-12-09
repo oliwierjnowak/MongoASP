@@ -1,4 +1,5 @@
 using MongoDBI.Server.Models;
+using MongoDBI.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.Configure<MongoSettings>(
     builder.Configuration.GetSection("Database"));
+
+builder.Services.AddSingleton<IShiftsService,ShiftsService>();
 var app = builder.Build();
 
 app.UseDefaultFiles();
