@@ -12,6 +12,13 @@ namespace MongoDBI.Server.Controllers
 
         [HttpGet]
         public async Task<List<Employee>> Get() =>
-            await _service.GetAsync();
+          await _service.GetAsync();
+
+        [Route("{dono:int}")]
+        public async Task<Employee> Get( int dono) =>
+          await _service.GetSingleAsync(dono);
+
+
+
     }
 }

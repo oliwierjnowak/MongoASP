@@ -7,6 +7,7 @@ namespace MongoDBI.Server.Services
     public interface IShiftsService
     {
         Task<List<Employee>> GetAsync();
+        Task<Employee> GetSingleAsync(int dono);
 
     }
    
@@ -28,7 +29,10 @@ namespace MongoDBI.Server.Services
 
         public async Task<List<Employee>> GetAsync() =>
             await _collection.Find(_ => true).ToListAsync();
-             
+
+        public async Task<Employee> GetSingleAsync(int dono) =>
+           await _collection.Find(x => x.do_no == dono).FirstAsync();
+
 
     }
 }
