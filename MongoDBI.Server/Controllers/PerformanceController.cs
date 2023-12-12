@@ -19,7 +19,7 @@ namespace MongoDBI.Server.Controllers
             var f1000 = _relService.CreateShift(1000).Result.Item1;
             Console.WriteLine("MSSQL  1000: " + (decimal)f1000/1000 + " sec");
             var f10000 = _relService.CreateShift(10000).Result.Item1;
-            Console.WriteLine("MSSQL  10000: " + (decimal)f1000/60000 + " min");
+            Console.WriteLine("MSSQL  10000: " + (decimal)f10000/60000 + " min");
 
             Console.WriteLine(" \n");
             EmployeeController con = new EmployeeController(_service);
@@ -28,7 +28,7 @@ namespace MongoDBI.Server.Controllers
             var f1000Mongo = await con.Create1002(1000);
             Console.WriteLine("MONGO  1000: " + (decimal)f1000Mongo/1000 + " sec");
             var f10000Mongo = await con.Create1002(10000);
-            Console.WriteLine("MONGO  1000: " + (decimal)f1000Mongo/60000 + " min");
+            Console.WriteLine("MONGO  1000: " + (decimal)f10000Mongo/60000 + " min");
 
             return @$"
 INSERT
