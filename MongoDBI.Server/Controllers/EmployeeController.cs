@@ -184,5 +184,14 @@ namespace MongoDBI.Server.Controllers
         {
             return await _service.GetAggregateAsync();
         }
+
+        [HttpGet]
+        [Route("workdays/{sort:bool}")]
+        public async Task<dynamic> GetWorkdays(bool sort)
+        {
+            byte sortval = sort ? (byte)1 : (byte)0;
+
+            return await _service.GetWorkdays(sortval);
+        }
     }
 }

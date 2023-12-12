@@ -18,6 +18,7 @@ namespace MongoDBI.Server.Services
         Task RemoveAllAsync();
         Task<List<Employee>> IsoWeekDayAndShiftName(int isoWeek, DayOfWeek day, int shiftname);
         Task<List<EmpDTO>> GetAggregateAsync();
+        Task<dynamic> GetWorkdays(byte sort);
 
     }
 
@@ -123,14 +124,11 @@ namespace MongoDBI.Server.Services
 
             var shiftsCollection = mongoDatabase.GetCollection<BsonDocument>("workdays");
 
-            // Perform aggregation
 
             var pipeline = new BsonDocument[]
             {
-            // Unwind the "shifts" array
+        
             new BsonDocument("$unwind", "$shifts"),
-
-            // Lookup to join with "shifts" collection
             new BsonDocument("$lookup",
                 new BsonDocument
                 {
@@ -194,9 +192,6 @@ namespace MongoDBI.Server.Services
                     { "as", "shifts.sunday" }
                 }
             ),
-
-
-            // Project to reshape the document
             new BsonDocument("$project",
                 new BsonDocument
                 {
@@ -251,7 +246,44 @@ namespace MongoDBI.Server.Services
 
         }
 
+        public async Task<dynamic> GetWorkdays(byte sortASC)
+        {
+            var sort = sortASC == 1 ? 1 : -1;
+            var mongoClient = new MongoClient(
+            _databaseSettings.Value.ConnectionString);
+
+            var mongoDatabase = mongoClient.GetDatabase(
+                _databaseSettings.Value.DatabaseName);
+
+            var shiftsCollection = mongoDatabase.GetCollection<WorkdayObject>("workdays");
 
 
+            var pipeline = new BsonDocument[]
+            {
+           new BsonDocument("$sort",
+                new BsonDocument
+                {
+
+
+                    {"shifthours",sort }
+                }
+            ),
+            // Project to reshape the document
+            new BsonDocument("$project",
+                new BsonDocument
+                {
+        
+                   
+                    {"shiftname",1 },
+                     { "_id",(BsonValue)0},
+                      {"shifthours",1 }
+                }
+            )
+            };
+
+            // returning dynamic because there is no extra need for debugging at this point or converting it into some object
+            var x =  (await shiftsCollection.AggregateAsync<dynamic>(pipeline)).ToList();
+            return x;
+        }
     }
 }
