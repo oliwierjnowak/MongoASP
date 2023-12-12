@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
+using MongoDB.Bson;
 using MongoDBI.Server.Models;
 using MongoDBI.Server.Services;
 using System.Diagnostics;
@@ -17,7 +18,7 @@ namespace MongoDBI.Server.Controllers
           await _service.GetAsync();
 
         [HttpGet("weekdayshiftname")]
-        public async Task<List<Employee>> IsoWeekDayAndShiftName(int isoWeek, int day, string shiftname)
+        public async Task<List<Employee>> IsoWeekDayAndShiftName(int isoWeek, int day, int shiftname)
         {
             DayOfWeek dayOfWeek = (DayOfWeek)day;
             return await _service.IsoWeekDayAndShiftName(isoWeek, dayOfWeek, shiftname);
@@ -56,45 +57,39 @@ namespace MongoDBI.Server.Controllers
                     do_name = "create 100",
                     do_no = 10,
                     shifts = [
-                        new Shift
-                        {
-                            ISOweek= 1,
-                            year= 2100,
-                            monday = new Workday
-                            {
-                                shifthours= 1,
-                                shiftname= "100"
-                            },
-                            friday = new Workday
-                            {
-                                shifthours = 1,
-                                shiftname = "100"
-                            },
-                            saturday = new Workday
-                            {
-                                shifthours = 1,
-                                shiftname = "100"
-                            },
-                            sunday = new Workday
-                            {
-                                shifthours = 1,
-                                shiftname = "100"
-                            },
-                            thursday = new Workday
-                            {
-                                shifthours = 1,
-                                shiftname = "100"
-                            },
-                            tuesday = new Workday
-                            {
-                                shifthours = 1,
-                                shiftname = "100"
-                            },
-                            wednesday = new Workday
-                            {
-                                shifthours = 1,
-                                shiftname = "100"
-                            }
+                       new Shift
+                       {
+                           ISOweek = 1,
+                           year = 2100,
+                           monday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           friday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           saturday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           sunday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           thursday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           tuesday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           wednesday = new Workday
+                           {
+                               workdays_id = 1
+                           }
+                       
                         }
                         ]
                 }
@@ -134,38 +129,31 @@ namespace MongoDBI.Server.Controllers
                             year = 2100,
                             monday = new Workday
                             {
-                                shifthours = 1,
-                                shiftname = "100"
+                                workdays_id = 1
                             },
                             friday = new Workday
                             {
-                                shifthours = 1,
-                                shiftname = "100"
+                                workdays_id = 1
                             },
                             saturday = new Workday
                             {
-                                shifthours = 1,
-                                shiftname = "100"
+                                workdays_id = 1
                             },
                             sunday = new Workday
                             {
-                                shifthours = 1,
-                                shiftname = "100"
+                                workdays_id = 1
                             },
                             thursday = new Workday
                             {
-                                shifthours = 1,
-                                shiftname = "100"
+                                workdays_id = 1
                             },
                             tuesday = new Workday
                             {
-                                shifthours = 1,
-                                shiftname = "100"
+                                workdays_id = 1
                             },
                             wednesday = new Workday
                             {
-                                shifthours = 1,
-                                shiftname = "100"
+                                workdays_id = 1
                             }
                         }
                         ]
@@ -191,6 +179,10 @@ namespace MongoDBI.Server.Controllers
             return sw.ElapsedMilliseconds;
         }
 
-        
+        [HttpGet("aggregate")]
+        public async Task<List<EmpDTO>> GetAggregateAsync()
+        {
+            return await _service.GetAggregateAsync();
+        }
     }
 }

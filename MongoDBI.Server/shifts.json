@@ -1,0 +1,22 @@
+[
+  {
+    "_id": 1,
+    "shiftname": "A",
+    "shifthours": 8
+  },
+  {
+    "_id":  0,
+    "shiftname": "0",
+    "shifthours": 0
+  },
+  {
+    "_id": 3,
+    "shiftname": "B",
+    "shifthours": 4
+  },
+  {
+    "_id": 4,
+    "shiftname": "Christ",
+    "shifthours": 24
+  }
+]
