@@ -1,0 +1,287 @@
+[{
+    "do_no": 1,
+    "do_name" : "Oliwier",
+    "shifts" : [
+        {
+            "ISOweek": 1,
+            "year" : 2023,
+            "monday": {
+                    "shiftname": "A",
+                    "shifthours": 8 
+            },
+            "tuesday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "wednesday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "thursday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "friday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "saturday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            },
+            "sunday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            }
+        },
+        {
+            "ISOweek": 2,
+            "year" : 2023,
+            "monday": {
+                    "shiftname": "B",
+                    "shifthours": 4 
+            },
+            "tuesday": {
+                "shiftname": "B",
+                "shifthours": 4 
+            },
+            "wednesday": {
+                "shiftname": "B",
+                "shifthours": 4 
+            },
+            "thursday": {
+                "shiftname": "B",
+                "shifthours": 4 
+            },
+            "friday": {
+                "shiftname": "B",
+                "shifthours": 4
+            },
+            "saturday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            },
+            "sunday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            }
+        }      
+        
+    ]
+},
+
+{
+    "do_no": 2,
+    "do_name" : "Philipp",
+    "shifts" : [
+        {
+            "ISOweek": 1,
+            "year" : 2023,
+            "monday": {
+                    "shiftname": "A",
+                    "shifthours": 8 
+            },
+            "tuesday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "wednesday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "thursday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "friday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "saturday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            },
+            "sunday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            }
+        },
+        {
+            "ISOweek": 2,
+            "year" : 2023,
+            "monday": {
+                    "shiftname": "B",
+                    "shifthours": 4 
+            },
+            "tuesday": {
+                "shiftname": "B",
+                "shifthours": 4 
+            },
+            "wednesday": {
+                "shiftname": "B",
+                "shifthours": 4 
+            },
+            "thursday": {
+                "shiftname": "B",
+                "shifthours": 4 
+            },
+            "friday": {
+                "shiftname": "B",
+                "shifthours": 4
+            },
+            "saturday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            },
+            "sunday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            }
+        }         
+        
+    ]
+},
+{
+    "do_no": 3,
+    "do_name" : "Anton",
+    "shifts" : [
+        {
+            "ISOweek": 1,
+            "year" : 2023,
+            "monday": {
+                    "shiftname": "A",
+                    "shifthours": 8 
+            },
+            "tuesday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "wednesday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "thursday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "friday": {
+                "shiftname": "A",
+                "shifthours": 8 
+            },
+            "saturday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            },
+            "sunday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            }
+        },
+        {
+            "ISOweek": 2,
+            "year" : 2023,
+            "monday": {
+                    "shiftname": "B",
+                    "shifthours": 4 
+            },
+            "tuesday": {
+                "shiftname": "B",
+                "shifthours": 4 
+            },
+            "wednesday": {
+                "shiftname": "B",
+                "shifthours": 4 
+            },
+            "thursday": {
+                "shiftname": "B",
+                "shifthours": 4 
+            },
+            "friday": {
+                "shiftname": "B",
+                "shifthours": 4
+            },
+            "saturday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            },
+            "sunday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            }
+        }         
+        
+    ]
+},
+{
+    "do_no": 4,
+    "do_name" : "Jesus",
+    "shifts" : [
+        {
+            "ISOweek": 1,
+            "year" : 2023,
+            "monday": {
+                    "shiftname": "Christ",
+                    "shifthours": 24 
+            },
+            "tuesday": {
+                "shiftname": "Christ",
+                "shifthours": 24 
+            },
+            "wednesday": {
+                "shiftname": "Christ",
+                "shifthours": 24 
+            },
+            "thursday": {
+                "shiftname": "Christ",
+                "shifthours": 24 
+            },
+            "friday": {
+                "shiftname": "Christ",
+                "shifthours": 24 
+            },
+            "saturday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            },
+            "sunday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            }
+        },
+        {
+            "ISOweek": 2,
+            "year" : 2023,
+            "monday": {
+                "shiftname": "Christ",
+                "shifthours": 24 
+            },
+            "tuesday": {
+                "shiftname": "Christ",
+                "shifthours": 24 
+            },
+            "wednesday": {
+                "shiftname": "Christ",
+                "shifthours": 24 
+            },
+            "thursday": {
+                "shiftname": "Christ",
+                "shifthours": 24 
+            },
+            "friday": {
+                "shiftname": "Christ",
+                "shifthours": 24 
+            },
+            "saturday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            },
+            "sunday": {
+                "shiftname": "0",
+                "shifthours": 0 
+            }
+        }         
+        
+    ]
+}
+
+]

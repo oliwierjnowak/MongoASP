@@ -14,6 +14,12 @@ namespace MongoDBI.Server.Models
         public string do_name { get; set;}
         [BsonElement("shifts")]
         public IEnumerable<Shift> shifts { get; set; }
+
+        public Employee Clone()
+        {
+            var clone = this.MemberwiseClone();
+            return (Employee)clone;
+        }
     }
 
     public class Shift
