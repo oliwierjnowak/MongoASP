@@ -4,6 +4,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
 using MongoDBI.Server.Models;
+using System.Diagnostics;
 
 namespace MongoDBI.Server.Services
 {
@@ -12,6 +13,7 @@ namespace MongoDBI.Server.Services
         Task<List<Employee>> GetAsync();
         Task<Employee> GetSingleAsync(int dono);
         Task<Employee> CreateAsync(Employee newEmp);
+        Task<long> CreatePerfAsync(int howoften);
         Task<Employee> UpdateAsync(int dono, Employee updatedEmployee);
         Task RemoveAsync(int dono);
         Task CreateMany(IEnumerable<Employee> Emps);
@@ -245,7 +247,7 @@ namespace MongoDBI.Server.Services
             return empDTOs;
 
         }
-
+        //doesnt return shift with 0 hours
         public async Task<dynamic> GetWorkdays(byte sortASC)
         {
             var sort = sortASC == 1 ? 1 : -1;
@@ -268,6 +270,14 @@ namespace MongoDBI.Server.Services
                     {"shifthours",sort }
                 }
             ),
+             new BsonDocument("$match",
+                new BsonDocument
+                {
+
+
+                    {"shifthours",new BsonDocument("$gt" , 0 ) }
+                }
+            ),
             // Project to reshape the document
             new BsonDocument("$project",
                 new BsonDocument
@@ -284,6 +294,64 @@ namespace MongoDBI.Server.Services
             // returning dynamic because there is no extra need for debugging at this point or converting it into some object
             var x =  (await shiftsCollection.AggregateAsync<dynamic>(pipeline)).ToList();
             return x;
+        }
+
+        public async Task<long> CreatePerfAsync(int howoften)
+        {
+
+            var newEmp = new Employee
+            {
+                do_name = "create 100",
+                do_no = 10,
+                shifts = [
+                       new Shift
+                       {
+                           ISOweek = 1,
+                           year = 2100,
+                           monday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           friday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           saturday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           sunday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           thursday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           tuesday = new Workday
+                           {
+                               workdays_id = 1
+                           },
+                           wednesday = new Workday
+                           {
+                               workdays_id = 1
+                           }
+
+                       }
+                        ]
+            };
+            Stopwatch sw = Stopwatch.StartNew();
+            int i = 0;
+            while(i < howoften)
+            {
+                await _collection.InsertOneAsync(newEmp.Clone());
+                i++;
+            }
+     
+
+            sw.Stop();
+            var time = sw.ElapsedMilliseconds;
+            return time;
         }
     }
 }
