@@ -95,7 +95,7 @@ namespace MongoDBI.Server.Services
             };
             SqlConnection _connection = new SqlConnection("Server=localhost,1433;User ID=SA;Password=A@123!23sda;Trusted_Connection=False;Encrypt=False;");
             var dow = "";
-            Stopwatch sw = Stopwatch.StartNew();
+            
             switch (employeeShift.DOW)
             {
                 case 1:
@@ -125,8 +125,8 @@ namespace MongoDBI.Server.Services
             string insert = @$"update [dbo].[csti_do_shift] 
 									set  dosh_week_number = @ISOWeek, dosh_year = @ISOYear, [{dow}] = @ShiftNR
 									where
-									dosh_do_no = @EmpNr and dosh_week_number = @ISOWeek and dosh_year = @ISOYear";
-
+									dosh_no =4";
+            Stopwatch sw = Stopwatch.StartNew();
             var x = await _connection.ExecuteAsync(insert, employeeShift);
             sw.Stop();
             _connection.Close();
@@ -156,51 +156,56 @@ namespace MongoDBI.Server.Services
         }
 
         //     Task<Employee> GetSingleAsync(int dono);  mit Filter
-        public async Task<(long,List<EmployeeShift>)> Find2(int superior, int emp)
+        public async Task<(long,List<EmployeeShift>)> Find2(int emp)
         {
             SqlConnection _connection = new SqlConnection("Server=localhost,1433;User ID=SA;Password=A@123!23sda;Trusted_Connection=False;Encrypt=False;");
             string shiftOverview = @$"
-								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 1) as 'DOW',dosh_monday as 'ShiftNR'  , EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
-								from [dbo].[csti_do_shift] 
-								join [dbo].[csti_daily_schedule] as EmpShift on dosh_monday = EmpShift.ds_no 
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 1) as 'DOW',dosh_monday as 'ShiftNR'  
+                                from [dbo].[csti_do_shift] 
+                                where dosh_do_no=@emp
 								union all
 
-								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 2) as 'DOW',dosh_wednesday as 'ShiftNR' , EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 2) as 'DOW',dosh_wednesday as 'ShiftNR'
 								from [dbo].[csti_do_shift] 
-								join [dbo].[csti_daily_schedule] as EmpShift on dosh_wednesday = EmpShift.ds_no 
+
+  where dosh_do_no=@emp
 								union all
 
-								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 3) as 'DOW',dosh_wednesday as 'ShiftNR' , EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 3) as 'DOW',dosh_wednesday as 'ShiftNR'
 								from [dbo].[csti_do_shift] 
-								join [dbo].[csti_daily_schedule] as EmpShift on dosh_wednesday = EmpShift.ds_no 
+
+  where dosh_do_no=@emp
 								union all
 
-								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 4) as 'DOW',dosh_thursday as 'ShiftNR', EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 4) as 'DOW',dosh_thursday as 'ShiftNR'
 								from [dbo].[csti_do_shift] 
-								join [dbo].[csti_daily_schedule] as EmpShift on dosh_thursday = EmpShift.ds_no 
+
+  where dosh_do_no=@emp
 								union all
 
 
-								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 5) as 'DOW',dosh_friday as 'ShiftNR', EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours' 	
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 5) as 'DOW',dosh_friday as 'ShiftNR'
 								from [dbo].[csti_do_shift] 
-								join [dbo].[csti_daily_schedule] as EmpShift on dosh_friday = EmpShift.ds_no 
+  where dosh_do_no=@emp
+
 								union all
 
-								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 6) as 'DOW',dosh_saturday as 'ShiftNR' , EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 6) as 'DOW',dosh_saturday as 'ShiftNR' 
 								from [dbo].[csti_do_shift] 
-								join [dbo].[csti_daily_schedule] as EmpShift on dosh_saturday = EmpShift.ds_no	
+
+  where dosh_do_no=@emp
 								union all
 
-								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 7) as 'DOW',dosh_sunday as 'ShiftNR', EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 7) as 'DOW',dosh_sunday as 'ShiftNR'
 								from [dbo].[csti_do_shift] 
-								join [dbo].[csti_daily_schedule] as EmpShift on dosh_sunday = EmpShift.ds_no ";
+								
+  where dosh_do_no=@emp";
             _connection.Open();
             string selectQuery = shiftOverview;
             Stopwatch sw = Stopwatch.StartNew();
             IEnumerable<EmployeeShift> data = await _connection.QueryAsync<EmployeeShift>(selectQuery, new
             {
-                emp = emp,
-                superior = superior
+                emp = emp
             });
             sw.Stop();
             _connection.Close();
@@ -266,6 +271,58 @@ namespace MongoDBI.Server.Services
             var time = sw.ElapsedMilliseconds;
 
             return (time,x2);
+        }
+
+
+        public async Task<(long, List<EmployeeShift>)> Find3Aggregation( int emp)
+        {
+            SqlConnection _connection = new SqlConnection("Server=localhost,1433;User ID=SA;Password=A@123!23sda;Trusted_Connection=False;Encrypt=False;");
+            string shiftOverview = @$"
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 1) as 'DOW',dosh_monday as 'ShiftNR'  , EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
+								from [dbo].[csti_do_shift] 
+								join [dbo].[csti_daily_schedule] as EmpShift on dosh_monday = EmpShift.ds_no 
+								union all
+
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 2) as 'DOW',dosh_wednesday as 'ShiftNR' , EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
+								from [dbo].[csti_do_shift] 
+								join [dbo].[csti_daily_schedule] as EmpShift on dosh_wednesday = EmpShift.ds_no 
+								union all
+
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 3) as 'DOW',dosh_wednesday as 'ShiftNR' , EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
+								from [dbo].[csti_do_shift] 
+								join [dbo].[csti_daily_schedule] as EmpShift on dosh_wednesday = EmpShift.ds_no 
+								union all
+
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 4) as 'DOW',dosh_thursday as 'ShiftNR', EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
+								from [dbo].[csti_do_shift] 
+								join [dbo].[csti_daily_schedule] as EmpShift on dosh_thursday = EmpShift.ds_no 
+								union all
+
+
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 5) as 'DOW',dosh_friday as 'ShiftNR', EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours' 	
+								from [dbo].[csti_do_shift] 
+								join [dbo].[csti_daily_schedule] as EmpShift on dosh_friday = EmpShift.ds_no 
+								union all
+
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 6) as 'DOW',dosh_saturday as 'ShiftNR' , EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
+								from [dbo].[csti_do_shift] 
+								join [dbo].[csti_daily_schedule] as EmpShift on dosh_saturday = EmpShift.ds_no	
+								union all
+
+								select dosh_do_no as 'EmpNR', dosh_week_number as 'ISOWeek', dosh_year as 'ISOYear', (Select 7) as 'DOW',dosh_sunday as 'ShiftNR', EmpShift.ds_name as 'ShiftName' , EmpShift.ds_hours as 'ShiftHours'
+								from [dbo].[csti_do_shift] 
+								join [dbo].[csti_daily_schedule] as EmpShift on dosh_sunday = EmpShift.ds_no ";
+            _connection.Open();
+            string selectQuery = shiftOverview;
+            Stopwatch sw = Stopwatch.StartNew();
+            IEnumerable<EmployeeShift> data = await _connection.QueryAsync<EmployeeShift>(selectQuery, new
+            {
+                emp = emp
+            });
+            sw.Stop();
+            _connection.Close();
+            var time = sw.ElapsedMilliseconds;
+            return (time, (List<EmployeeShift>)data);
         }
     }
 

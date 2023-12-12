@@ -54,7 +54,7 @@ namespace MongoDBI.Server.Controllers
             List<Employee> list = [
                 new Employee
                 {
-                    do_name = "create 100",
+                    do_name = "create100",
                     do_no = 10,
                     shifts = [
                        new Shift
@@ -120,7 +120,7 @@ namespace MongoDBI.Server.Controllers
             List<Employee> list = [
                 new Employee
                 {
-                    do_name = "create 100",
+                    do_name = "create100",
                     do_no = 10,
                     shifts = [
                         new Shift
@@ -166,7 +166,7 @@ namespace MongoDBI.Server.Controllers
             {
                 var x = list[0].Clone();
                 x.do_no = x.do_no + value;
-                CreateEmp(x);
+                await CreateEmp(x);
                 list.Add(x);
             }
            
@@ -183,7 +183,7 @@ namespace MongoDBI.Server.Controllers
         [HttpGet("aggregate")]
         public async Task<List<EmpDTO>> GetAggregateAsync()
         {
-            return await _service.GetAggregateAsync();
+            return _service.GetAggregateAsync().Result.Item2;
         }
 
 

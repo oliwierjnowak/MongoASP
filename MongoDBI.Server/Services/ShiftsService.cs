@@ -5,6 +5,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
 using MongoDBI.Server.Models;
 using System.Diagnostics;
+using static MongoDB.Driver.WriteConcern;
 
 namespace MongoDBI.Server.Services
 {
@@ -19,8 +20,8 @@ namespace MongoDBI.Server.Services
         Task CreateMany(IEnumerable<Employee> Emps);
         Task RemoveAllAsync();
         Task<List<Employee>> IsoWeekDayAndShiftName(int isoWeek, DayOfWeek day, int shiftname);
-        Task<List<EmpDTO>> GetAggregateAsync();
-        Task<dynamic> GetWorkdays(byte sort);
+        Task<(long,List<EmpDTO>)> GetAggregateAsync();
+        Task<(long,dynamic)> GetWorkdays(byte sort);
 
     }
 
@@ -56,7 +57,13 @@ namespace MongoDBI.Server.Services
 
         public async Task<Employee> UpdateAsync(int dono, Employee updatedEmployee)
         {
-            await _collection.ReplaceOneAsync(x => x.do_no == dono, updatedEmployee);
+            //extremly fast
+             await _collection.ReplaceOneAsync(x => x.do_no == dono, updatedEmployee);
+           /** var filter = Builders<Employee>.Filter.Eq(s => s.do_no, dono) ;
+            var update = Builders<Employee>.Update
+            .Set(restaurant => restaurant, updatedEmployee);
+            await _collection.UpdateManyAsync(filter, update);**/
+
             return await _collection.Find(x => x.do_no == updatedEmployee.do_no).FirstAsync();
         }
             
@@ -68,7 +75,7 @@ namespace MongoDBI.Server.Services
             await _collection.InsertManyAsync(Emps);
 
         public async Task RemoveAllAsync() =>
-             await _collection.DeleteOneAsync(_ => true);
+             await _collection.DeleteManyAsync(_ => true);
 
 
         public async Task<List<Employee>> IsoWeekDayAndShiftName(int isoWeek, DayOfWeek day, int shiftname)
@@ -111,7 +118,7 @@ namespace MongoDBI.Server.Services
             
         }
 
-        public async Task<List<EmpDTO>> GetAggregateAsync()
+        public async Task<(long,List<EmpDTO>)> GetAggregateAsync()
         {
            
 
@@ -204,7 +211,10 @@ namespace MongoDBI.Server.Services
                 }
             )
             };
+            Stopwatch sw3 = Stopwatch.StartNew();
             var result = await agendoCollection.Aggregate<EmployeeAggregate>(pipeline).ToListAsync();
+            sw3.Stop();
+            var mongotime3 = sw3.ElapsedMilliseconds;
             var x = result.GroupBy(c => new { c.do_no, c.Id, c.do_name });
 
 
@@ -244,11 +254,11 @@ namespace MongoDBI.Server.Services
             }
 
 
-            return empDTOs;
+            return (mongotime3,empDTOs);
 
         }
         //doesnt return shift with 0 hours
-        public async Task<dynamic> GetWorkdays(byte sortASC)
+        public async Task<(long,dynamic)> GetWorkdays(byte sortASC)
         {
             var sort = sortASC == 1 ? 1 : -1;
             var mongoClient = new MongoClient(
@@ -290,10 +300,12 @@ namespace MongoDBI.Server.Services
                 }
             )
             };
-
+            Stopwatch sw4 = Stopwatch.StartNew();
             // returning dynamic because there is no extra need for debugging at this point or converting it into some object
             var x =  (await shiftsCollection.AggregateAsync<dynamic>(pipeline)).ToList();
-            return x;
+            sw4.Stop();
+            var mongotime4 = sw4.ElapsedMilliseconds;
+            return (mongotime4,x);
         }
 
         public async Task<long> CreatePerfAsync(int howoften)
@@ -301,7 +313,7 @@ namespace MongoDBI.Server.Services
 
             var newEmp = new Employee
             {
-                do_name = "create 100",
+                do_name = "create100",
                 do_no = 10,
                 shifts = [
                        new Shift
