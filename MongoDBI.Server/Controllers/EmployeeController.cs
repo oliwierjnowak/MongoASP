@@ -179,12 +179,15 @@ namespace MongoDBI.Server.Controllers
             return sw.ElapsedMilliseconds;
         }
 
+        // // komplizierte aggregate funktion die die schichten tage joint
         [HttpGet("aggregate")]
         public async Task<List<EmpDTO>> GetAggregateAsync()
         {
             return await _service.GetAggregateAsync();
         }
 
+
+        // Gibt die liste der schicht tagen zurück und sortiert deswegen bool
         [HttpGet]
         [Route("workdays/{sort:bool}")]
         public async Task<dynamic> GetWorkdays(bool sort)
