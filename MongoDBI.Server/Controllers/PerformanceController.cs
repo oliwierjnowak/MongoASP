@@ -10,6 +10,7 @@ namespace MongoDBI.Server.Controllers
     [ApiController]
     public class PerformanceController(IShiftsService _service) : ControllerBase
     {
+        /**
         RelationalService _relService = new RelationalService();
         EmployeeController con = new EmployeeController(_service);
         [HttpGet("inserts")]
@@ -193,6 +194,6 @@ MONGO   {(decimal)mongotime4 / 1000} sec
 {await REadsAsync()}
 ";
         }
-
+        **/
     }
 }

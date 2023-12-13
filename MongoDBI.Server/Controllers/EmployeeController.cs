@@ -47,138 +47,138 @@ namespace MongoDBI.Server.Controllers
         [HttpPost]
         public async Task<Employee> CreateEmp([FromBody] Employee CreateEmp) =>
             await _service.CreateAsync(CreateEmp);
-
-        [HttpPost("{numberOfInserts:int}/InsertMany")]
-        public async Task<long> Create100(int numberOfInserts)
-        {
-            List<Employee> list = [
-                new Employee
+        /**
+ [HttpPost("{numberOfInserts:int}/InsertMany")]
+ public async Task<long> Create100(int numberOfInserts)
+ {
+     List<Employee> list = [
+         new Employee
+         {
+             do_name = "create100",
+             do_no = 10,
+             shifts = [
+                new Shift
                 {
-                    do_name = "create100",
-                    do_no = 10,
-                    shifts = [
-                       new Shift
-                       {
-                           ISOweek = 1,
-                           year = 2100,
-                           monday = new Workday
-                           {
-                               workdays_id = 1
-                           },
-                           friday = new Workday
-                           {
-                               workdays_id = 1
-                           },
-                           saturday = new Workday
-                           {
-                               workdays_id = 1
-                           },
-                           sunday = new Workday
-                           {
-                               workdays_id = 1
-                           },
-                           thursday = new Workday
-                           {
-                               workdays_id = 1
-                           },
-                           tuesday = new Workday
-                           {
-                               workdays_id = 1
-                           },
-                           wednesday = new Workday
-                           {
-                               workdays_id = 1
-                           }
-                       
-                        }
-                        ]
-                }
-            ];
+                    ISOweek = 1,
+                    year = 2100,
+                    monday = new Workday
+                    {
+                        workdays_id = 1
+                    },
+                    friday = new Workday
+                    {
+                        workdays_id = 1
+                    },
+                    saturday = new Workday
+                    {
+                        workdays_id = 1
+                    },
+                    sunday = new Workday
+                    {
+                        workdays_id = 1
+                    },
+                    thursday = new Workday
+                    {
+                        workdays_id = 1
+                    },
+                    tuesday = new Workday
+                    {
+                        workdays_id = 1
+                    },
+                    wednesday = new Workday
+                    {
+                        workdays_id = 1
+                    }
+                
+                 }
+                 ]
+         }
+     ];
 
-            foreach (int value in Enumerable.Range(1, numberOfInserts))
-            {
-                var x = list[0].Clone();
-                x.do_no = x.do_no + value;
+     foreach (int value in Enumerable.Range(1, numberOfInserts))
+     {
+         var x = list[0].Clone();
+         x.do_no = x.do_no + value;
 
-                list.Add(x);
-            }
-            Stopwatch sw = new Stopwatch();
+         list.Add(x);
+     }
+     Stopwatch sw = new Stopwatch();
 
-            sw.Start();
+     sw.Start();
 
-            await _service.CreateMany(list);
+     await _service.CreateMany(list);
 
-            sw.Stop();
-           
+     sw.Stop();
+    
 
-            return sw.ElapsedMilliseconds;
-        }
+     return sw.ElapsedMilliseconds;
+ }
 
-        [HttpPost("{numberOfInserts:int}/InsertOne")]
-        public async Task<long> Create1002(int numberOfInserts)
-        {
-            List<Employee> list = [
-                new Employee
-                {
-                    do_name = "create100",
-                    do_no = 10,
-                    shifts = [
-                        new Shift
-                        {
-                            ISOweek = 1,
-                            year = 2100,
-                            monday = new Workday
-                            {
-                                workdays_id = 1
-                            },
-                            friday = new Workday
-                            {
-                                workdays_id = 1
-                            },
-                            saturday = new Workday
-                            {
-                                workdays_id = 1
-                            },
-                            sunday = new Workday
-                            {
-                                workdays_id = 1
-                            },
-                            thursday = new Workday
-                            {
-                                workdays_id = 1
-                            },
-                            tuesday = new Workday
-                            {
-                                workdays_id = 1
-                            },
-                            wednesday = new Workday
-                            {
-                                workdays_id = 1
-                            }
-                        }
-                        ]
-                }
-            ];
-            Stopwatch sw = new Stopwatch();
+ [HttpPost("{numberOfInserts:int}/InsertOne")]
+ public async Task<long> Create1002(int numberOfInserts)
+ {
+     List<Employee> list = [
+         new Employee
+         {
+             do_name = "create100",
+             do_no = 10,
+             shifts = [
+                 new Shift
+                 {
+                     ISOweek = 1,
+                     year = 2100,
+                     monday = new Workday
+                     {
+                         workdays_id = 1
+                     },
+                     friday = new Workday
+                     {
+                         workdays_id = 1
+                     },
+                     saturday = new Workday
+                     {
+                         workdays_id = 1
+                     },
+                     sunday = new Workday
+                     {
+                         workdays_id = 1
+                     },
+                     thursday = new Workday
+                     {
+                         workdays_id = 1
+                     },
+                     tuesday = new Workday
+                     {
+                         workdays_id = 1
+                     },
+                     wednesday = new Workday
+                     {
+                         workdays_id = 1
+                     }
+                 }
+                 ]
+         }
+     ];
+     Stopwatch sw = new Stopwatch();
 
-            sw.Start();
-            foreach (int value in Enumerable.Range(1, numberOfInserts))
-            {
-                var x = list[0].Clone();
-                x.do_no = x.do_no + value;
-                await CreateEmp(x);
-                list.Add(x);
-            }
-           
+     sw.Start();
+     foreach (int value in Enumerable.Range(1, numberOfInserts))
+     {
+         var x = list[0].Clone();
+         x.do_no = x.do_no + value;
+         await CreateEmp(x);
+         list.Add(x);
+     }
+    
 
-           // await _service.CreateMany(list);
+    // await _service.CreateMany(list);
 
-            sw.Stop();
+     sw.Stop();
 
 
-            return sw.ElapsedMilliseconds;
-        }
-
+     return sw.ElapsedMilliseconds;
+ }
+ **/
         // // komplizierte aggregate funktion die die schichten tage joint
         [HttpGet("aggregate")]
         public async Task<List<EmpDTO>> GetAggregateAsync()
@@ -194,7 +194,7 @@ namespace MongoDBI.Server.Controllers
         {
             byte sortval = sort ? (byte)1 : (byte)0;
 
-            return await _service.GetWorkdays(sortval);
+            return  _service.GetWorkdays(sortval).Result.Item2;
         }
     }
 }
