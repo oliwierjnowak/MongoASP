@@ -10,7 +10,6 @@ using System.Diagnostics;
 namespace MongoDBI.Server.Controllers
 {
     [Route("api/[controller]")]
-    [EnableCors("AllowSpecificOrigin")]
 
     [ApiController]
     public class EmployeeController(IShiftsService _service) : ControllerBase

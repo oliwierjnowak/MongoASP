@@ -75,21 +75,8 @@ const shiftContent = (
 );
 
 function App() {
-<<<<<<< HEAD
 
 
-
-
-    return (
-        <div>
-            <h1 id="tabelLabel">Hallo MAxi und philipp </h1>
-        
-            
-        </div>
-    );
-
-
-=======
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(
     new Date().getFullYear()
@@ -127,7 +114,7 @@ function App() {
 
   async function populateEmployeeData() {
     try {
-      const response = await fetch("https://localhost:7046/api/employee/");
+      const response = await fetch("https://mongoaspapi.azurewebsites.net/api/employee/");
       console.log(response.status);
       if (!response.ok) {
         console.error(`Error fetching: ${response.status}`);
@@ -176,7 +163,6 @@ function App() {
       </div>
     </div>
   );
->>>>>>> d0739e5164f5d3cd514de917ccae387fe388b8ed
 }
 
 export default App;

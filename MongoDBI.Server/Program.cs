@@ -16,7 +16,7 @@ builder.Services.AddSingleton<IShiftsService,ShiftsService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("https://localhost:5173") // Front-end application's URL
+        builder => builder.WithOrigins("https://mongoaspapi.azurewebsites.net/") // Front-end application's URL
                           .AllowAnyHeader()
                           .AllowAnyMethod());
 });

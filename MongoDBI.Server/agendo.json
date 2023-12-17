@@ -52,6 +52,56 @@
       "sunday": {
         "workdays_id": 0
       }
+    },
+    {
+      "ISOweek": 1,
+      "year": 2024,
+      "monday": {
+        "workdays_id": 1
+      },
+      "tuesday": {
+        "workdays_id": 1
+      },
+      "wednesday": {
+        "workdays_id": 1
+      },
+      "thursday": {
+        "workdays_id": 1
+      },
+      "friday": {
+        "workdays_id": 1
+      },
+      "saturday": {
+        "workdays_id": 0
+      },
+      "sunday": {
+        "workdays_id": 0
+      }
+    },
+    {
+      "ISOweek": 2,
+      "year": 2024  ,
+      "monday": {
+        "workdays_id": 3
+      },
+      "tuesday": {
+        "workdays_id": 3
+      },
+      "wednesday": {
+        "workdays_id": 3
+      },
+      "thursday": {
+        "workdays_id": 3
+      },
+      "friday": {
+        "workdays_id": 3
+      },
+      "saturday": {
+        "workdays_id": 0
+      },
+      "sunday": {
+        "workdays_id": 0
+      }
     }
 
   ]
@@ -167,6 +217,56 @@
           "sunday": {
             "workdays_id": 0
           }
+        },
+        {
+          "ISOweek": 1,
+          "year": 2024,
+          "monday": {
+            "workdays_id": 1
+          },
+          "tuesday": {
+            "workdays_id": 1
+          },
+          "wednesday": {
+            "workdays_id": 1
+          },
+          "thursday": {
+            "workdays_id": 1
+          },
+          "friday": {
+            "workdays_id": 1
+          },
+          "saturday": {
+            "workdays_id": 0
+          },
+          "sunday": {
+            "workdays_id": 0
+          }
+        },
+        {
+          "ISOweek": 2,
+          "year": 2024,
+          "monday": {
+            "workdays_id": 3
+          },
+          "tuesday": {
+            "workdays_id": 3
+          },
+          "wednesday": {
+            "workdays_id": 3
+          },
+          "thursday": {
+            "workdays_id": 3
+          },
+          "friday": {
+            "workdays_id": 3
+          },
+          "saturday": {
+            "workdays_id": 0
+          },
+          "sunday": {
+            "workdays_id": 0
+          }
         }
 
   ]
@@ -203,6 +303,31 @@
       {
         "ISOweek": 2,
         "year": 2023,
+        "monday": {
+          "workdays_id": 4
+        },
+        "tuesday": {
+          "workdays_id": 4
+        },
+        "wednesday": {
+          "workdays_id": 4
+        },
+        "thursday": {
+          "workdays_id": 4
+        },
+        "friday": {
+          "workdays_id": 4
+        },
+        "saturday": {
+          "workdays_id": 0
+        },
+        "sunday": {
+          "workdays_id": 0
+        }
+      },
+      {
+        "ISOweek": 2,
+        "year": 2024,
         "monday": {
           "workdays_id": 4
         },
