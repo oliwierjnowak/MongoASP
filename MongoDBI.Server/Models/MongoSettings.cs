@@ -2,10 +2,10 @@
 {
     public class MongoSettings
     {
-        public string ConnectionString { get; set; } = null!;
+        public string ConnectionString { get; set; } = "mongodb://localhost:27017";
 
-        public string DatabaseName { get; set; } = null!;
+        public string DatabaseName { get; set; } = "yoloNiklas";
 
-        public string CollectionName { get; set; } = null!;
+        public string CollectionName { get; set; } = "agendo";
     }
 }
