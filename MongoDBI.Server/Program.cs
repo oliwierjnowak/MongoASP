@@ -13,6 +13,13 @@ builder.Services.Configure<MongoSettings>(
     builder.Configuration.GetSection("Database"));
 
 builder.Services.AddSingleton<IShiftsService,ShiftsService>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("https://localhost:5173") // Front-end application's URL
+                          .AllowAnyHeader()
+                          .AllowAnyMethod());
+});
 var app = builder.Build();
 
 app.UseDefaultFiles();
@@ -32,5 +39,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
+app.UseCors("AllowSpecificOrigin");
 
 app.Run();

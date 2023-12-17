@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using MongoDB.Bson;
@@ -9,6 +10,8 @@ using System.Diagnostics;
 namespace MongoDBI.Server.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("AllowSpecificOrigin")]
+
     [ApiController]
     public class EmployeeController(IShiftsService _service) : ControllerBase
     {
